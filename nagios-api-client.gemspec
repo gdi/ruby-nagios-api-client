@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  # s.add_runtime_dependency "foo"
+  s.add_runtime_dependency "curb-fu"
+  
   s.add_development_dependency "rspec"
 end
