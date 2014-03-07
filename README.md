@@ -8,13 +8,48 @@ https://github.com/xb95/nagios-api
 Install
 -------
 
-gem install nagios-api-client
+    gem install nagios-api-client
 
-Usage
------
+If you are using bundler, add this to your Gemfile:
 
+    gem "nagios-api-client", require: 'nagios/api'
+
+If not using bundler:
+
+    require 'rubygems'
     require 'nagios/api'
 
+Examples
+------
+
+    # Create a new client to interact with the nagios-api server.
+    client = Nagios::API::Client.new("http://nagios-server:8181")
+    
+    # Optionally set authentication credentials
+    client = Nagios::API::Client.new("http://nagios-server:8181", user: 'user', password: 'password')
+    
+    # Find a host
+    host = client.hosts.find("hostname")
+    
+    # Find a service on the host
+    service = host.services.find("servicename")
+    
+    # Check the status
+    puts service.status
+    
+    # Check the status details
+    puts service.status_details
+    
+    # Schedule downtime
+    service.schedule_downtime(
+      author: "User 1", 
+      comment: "This is flexible downtime", 
+      start_time: Time.now, 
+      fixed: false, 
+      duration: 3600, 
+      end_time: Time.now + 14400
+    )
+  
 Author
 ------
 
