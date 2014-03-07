@@ -67,5 +67,22 @@ module Nagios::API
       
       true
     end
+    
+    def status
+      case current_state.to_i
+      when 0
+        :ok
+      when 1
+        :warning
+      when 2
+        :critical
+      else
+        :unknown
+      end
+    end
+    
+    def status_details
+      plugin_output
+    end
   end
 end
